@@ -1,1 +1,1 @@
-# training-jenkins
+# training-ex1
