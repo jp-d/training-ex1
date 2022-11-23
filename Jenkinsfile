@@ -19,22 +19,22 @@ pipeline {
     stage('Treatment') {
       steps {
         script {
-          appUpdateStart = time.getCurrTime()
-          styling.printInfo("################## Chrono => Treatment stage start ${appUpdateStart} ##################")
+          appUpdateStart = getCurrTime()
+          printInfo("################## Chrono => Treatment stage start ${appUpdateStart} ##################")
           NB_VOYELLES = compterNbVoyelles %input_word%
-          styling.printInfo("NB_VOYELLES : ${NB_VOYELLES}")  
-          styling.printInfo("################## Chrono => Treatment stage ended at ${time.getCurrTime()} ##################")
+          printInfo("NB_VOYELLES : ${NB_VOYELLES}")  
+          printInfo("################## Chrono => Treatment stage ended at ${getCurrTime()} ##################")
         }
       }	  
     }
     stage('Treatment 2') {
       steps {
         script {
-          appBuildStart = time.getCurrTime()
-          styling.printInfo("################## Chrono => Treatment 2 start ${appBuildStart} ##################")
+          appBuildStart = getCurrTime()
+          printInfo("################## Chrono => Treatment 2 start ${appBuildStart} ##################")
 		  
 		  
-          styling.printInfo("################## Chrono => Treatment 2 ended at ${time.getCurrTime()} ##################")
+          printInfo("################## Chrono => Treatment 2 ended at ${getCurrTime()} ##################")
         }
       }
     }
@@ -51,5 +51,51 @@ def compterNbVoyelles(mot) {
         }
     }
     return nbVoyelles
+}
+
+// Main function coloring a string message
+def printColor(message = '', foreground = 'black', background = 'white', style = 'none'){
+    def Map foregroundCodes = [black: '30', red: '31', green: '32', yellow: '33', blue: '34', magenta: '35', cyan: '36', white: '37']
+    def Map backgroundCodes = [black: '40', red: '41', green: '42', yellow: '43', blue: '44', magenta: '45', cyan: '46', white: '47']
+    def Map styleCodes = [none: '0', bold: '1', lowIntensity: '2', underline: '3']
+    try {
+        String fgd = foregroundCodes[foreground]
+        String bgd = backgroundCodes[background]
+        String st = styleCodes[style]
+        String colorCode = fgd + ';' + st + ';' + bgd + 'm'
+        println('\033[' + colorCode + message + '\033[0m')
+    }
+    catch(Exception e){
+        println("/!\\ Error in coloring message ${message} \n--> Exception: ${e}")
+    }
+}
+
+// Coloring string functions by message level
+def printInfo(message){
+    printColor(message, 'blue', 'white', 'bold')
+}
+
+def printNote(message){
+    printColor(message, 'magenta', 'white', 'bold')
+}
+
+def printError(message){
+    printColor(message, 'red', 'white', 'bold')
+}
+
+def printWarning(message){
+    printColor(message, 'yellow', 'white', 'bold')
+}
+
+def printSuccess(message){
+    printColor(message, 'green', 'white', 'bold')
+}
+
+def now () {
+  return new Date()
+}
+
+def getCurrTime() {
+  return now().format("dd-MM-yy_HH:mm:ss", TimeZone.getTimeZone('Europe/Paris'))
 }
 
