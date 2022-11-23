@@ -9,33 +9,34 @@ pipeline {
   environment {
     
 	// --> Variable used within the pipeline
-    // VARIABLE_EXAMPLE = "a value"
+    NB_VOYELLES = 0
 
   }
   
   parameters {
-    string(name: "input_word", defaultValue: "word", trim: true, description: "Input word")
+    string(name: "input_word", defaultValue: "soleil", trim: true, description: "Input word")
   }
   
   stages {
     stage('Treatment') {
       steps {
         script {
-		  appUpdateStart = time.getCurrTime()
-		  styling.printInfo("################## Chrono => Treatment stage start ${appUpdateStart} ##################")
-		  compterNbVoyelles(%input_word%)	  
-		  styling.printInfo("################## Chrono => Treatment stage ended at ${time.getCurrTime()} ##################")
-		}
+          appUpdateStart = time.getCurrTime()
+          styling.printInfo("################## Chrono => Treatment stage start ${appUpdateStart} ##################")
+          NB_VOYELLES = compterNbVoyelles(%input_word%)
+          styling.printInfo("NB_VOYELLES : ${NB_VOYELLES}")  
+          styling.printInfo("################## Chrono => Treatment stage ended at ${time.getCurrTime()} ##################")
+        }
       }	  
-	}
-	stage('Conditional treatment') {
+    }
+	stage('Treatment 2') {
       steps {
         script {
           appBuildStart = time.getCurrTime()
-		  styling.printInfo("################## Chrono => Application build stage start ${appBuildStart} ##################")
+          styling.printInfo("################## Chrono => Treatment 2 start ${appBuildStart} ##################")
 		  
 		  
-          styling.printInfo("################## Chrono => Application build started at ${appBuildStart} and ended at ${time.getCurrTime()} ##################")
+          styling.printInfo("################## Chrono => Treatment 2 ended at ${time.getCurrTime()} ##################")
         }
       }
     }
@@ -45,11 +46,12 @@ pipeline {
 
 def compterNbVoyelles(mot) {
     def nbVoyelles = 0
-    for (i = 0; i < mot.length; i++) {
+    for (i = 0; i < mot.length(); i++) {
         def lettre = mot[i].toLowerCase()
-        if ((lettre === "a") || (lettre === "e") || (lettre === "i") || (lettre ==="o") || (lettre === "u") || (lettre === "y")) {
-            nbVoyelles = nbVoyelles + 1
+        if ((lettre == "a") || (lettre == "e") || (lettre == "i") || (lettre =="o") || (lettre == "u") || (lettre == "y")) {
+            nbVoyelles ++
         }
     }
     return nbVoyelles
 }
+
