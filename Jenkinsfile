@@ -21,7 +21,7 @@ pipeline {
         script {
           appUpdateStart = getCurrTime()
           printInfo("################## Chrono => Treatment stage start ${appUpdateStart} ##################")
-          NB_VOYELLES = compterNbVoyelles %input_word%
+          NB_VOYELLES = compterNbVoyelles("%input_word%")
           printInfo("NB_VOYELLES : ${NB_VOYELLES}")  
           printInfo("################## Chrono => Treatment stage ended at ${getCurrTime()} ##################")
         }
