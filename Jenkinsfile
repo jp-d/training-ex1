@@ -9,6 +9,7 @@ pipeline {
   environment {
     // --> Variable used within the pipeline
     NB_VOYELLES = 0
+    TRIGGER = "OFF"
   }
   
   parameters {
@@ -28,6 +29,7 @@ pipeline {
       }	  
     }
     stage('Treatment 2') {
+      when { expression { env.TRIGGER == "ON" } }
       steps {
         script {
           appBuildStart = getCurrTime()
