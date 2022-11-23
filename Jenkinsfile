@@ -9,7 +9,6 @@ pipeline {
   environment {
     // --> Variable used within the pipeline
     NB_VOYELLES = 0
-    TRIGGER = "OFF"
   }
   
   parameters {
@@ -23,7 +22,13 @@ pipeline {
           appUpdateStart = getCurrTime()
           printInfo("################## Chrono => Treatment 1 start ${appUpdateStart} ##################")
           NB_VOYELLES = compterNbVoyelles(params.input_word)
-          printInfo("NB_VOYELLES : ${NB_VOYELLES}")  
+          printInfo("NB_VOYELLES : ${NB_VOYELLES}") 
+          if (expression {${NB_VOYELLES} > "2" }) { 
+            env.TRIGGER = "ON"
+            printInfo("TRIGGER: " + env.TRIGGER)
+          } else {
+            env.TRIGGER = "OFF"
+          } 
           printInfo("################## Chrono => Treatment 1 ended at ${getCurrTime()} ##################")
         }
       }	  
