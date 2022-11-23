@@ -16,14 +16,14 @@ pipeline {
   }
   
   stages {
-    stage('Treatment') {
+    stage('Treatment 1') {
       steps {
         script {
           appUpdateStart = getCurrTime()
-          printInfo("################## Chrono => Treatment stage start ${appUpdateStart} ##################")
+          printInfo("################## Chrono => Treatment 1 start ${appUpdateStart} ##################")
           NB_VOYELLES = compterNbVoyelles(params.input_word)
           printInfo("NB_VOYELLES : ${NB_VOYELLES}")  
-          printInfo("################## Chrono => Treatment stage ended at ${getCurrTime()} ##################")
+          printInfo("################## Chrono => Treatment 1 ended at ${getCurrTime()} ##################")
         }
       }	  
     }
