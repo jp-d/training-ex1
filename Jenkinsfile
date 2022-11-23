@@ -7,10 +7,8 @@ pipeline {
   }
   
   environment {
-    
-	// --> Variable used within the pipeline
+    // --> Variable used within the pipeline
     NB_VOYELLES = 0
-
   }
   
   parameters {
@@ -29,7 +27,7 @@ pipeline {
         }
       }	  
     }
-	stage('Treatment 2') {
+    stage('Treatment 2') {
       steps {
         script {
           appBuildStart = time.getCurrTime()
