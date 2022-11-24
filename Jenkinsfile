@@ -41,7 +41,6 @@ pipeline {
           appBuildStart = getCurrTime()
           printInfo("################## Chrono => Treatment 2 start ${appBuildStart} ##################")
           //printInfo("Selected word: " + params.input_word)
-		  
           printInfo("################## Chrono => Treatment 2 ended at ${getCurrTime()} ##################")
         }
       }
