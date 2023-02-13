@@ -23,11 +23,23 @@ pipeline {
           printInfo("################## Chrono => Treatment 1 start ${appUpdateStart} ##################")
           NB_VOYELLES = compterNbVoyelles(params.input_word)
           printInfo("NB_VOYELLES : ${NB_VOYELLES}")  
-          printInfo("################## Chrono => Treatment 1 ended at ${getCurrTime()} ##################")
+	  if (NB_VOYELLES >= 5 ) {
+
+            env.TRIGGER = "ON"
+
+            printInfo("TRIGGER: " + env.TRIGGER)​
+
+          } else {
+
+            env.TRIGGER = "OFF" 
+
+          }
+         printInfo("################## Chrono => Treatment 1 ended at ${getCurrTime()} ##################")
         }
       }	  
     }
     stage('Treatment 2') {
+      when { expression { env.TRIGGER == "ON" } }    
       steps {
         script {
           appBuildStart = getCurrTime()
