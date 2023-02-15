@@ -23,7 +23,7 @@ pipeline {
           printInfo("################## Chrono => Treatment 1 start ${appUpdateStart} ##################")
           NB_VOYELLES = compterNbVoyelles(params.input_word)
           printInfo("NB_VOYELLES : ${NB_VOYELLES}")  
-	  if (NB_VOYELLES >= 10 ) {
+	  if (NB_VOYELLES >= 11 ) {
 
             env.TRIGGER = "ON"
 
