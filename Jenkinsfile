@@ -12,7 +12,7 @@ pipeline {
 }
   
   parameters {
-    choice(name: 'input_word', choices: ['Soleil', 'Tornade', 'Extraordinairement'], description: 'Input word choice')
+    string(name: "input_word", defaultValue: "soleil", trim: true, description: "Input word")
   }
   
   stages {
@@ -39,13 +39,10 @@ pipeline {
         script {
           appBuildStart = getCurrTime()
           printInfo("################## Chrono => Treatment 2 start ${appBuildStart} ##################")
-          printInfo("Selected word: " + params.input_word)		  
+		  
 		  
           printInfo("################## Chrono => Treatment 2 ended at ${getCurrTime()} ##################")
         }
       }
     }
   }
-
-}
-
