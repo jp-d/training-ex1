@@ -8,6 +8,7 @@ pipeline {
   
   environment {
     // --> Variable used within the pipeline
+    // just to test
     NB_VOYELLES = 0
   }
   
