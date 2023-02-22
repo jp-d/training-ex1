@@ -12,7 +12,7 @@ pipeline {
   }
   
   parameters {
-    string(name: "input_word", defaultValue: "soleil", trim: true, description: "Input word")
+    string(name: "input_word", defaultValue: "solaaaeil", trim: true, description: "Input word")
   }
   
   stages {
