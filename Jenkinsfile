@@ -31,7 +31,7 @@ pipeline {
       }	  
     }
     stage('Treatment 2') {
-	    when { expression ( env.ACTIVATE == true )}
+	    when { expression { env.ACTIVATE == true }}
       steps {
         script {
           appBuildStart = getCurrTime()
