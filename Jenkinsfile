@@ -12,7 +12,8 @@ pipeline {
   }
   
   parameters {
-    string(name: "input_word", defaultValue: "soleil", trim: true, description: "Input word")
+    //string(name: "input_word", defaultValue: "soleil", trim: true, description: "Input word")
+    choice(name: 'input_word', choices: ['Geant', 'Petit', 'Eauoye'], description: 'Input word choice')
   }
   
   stages {
