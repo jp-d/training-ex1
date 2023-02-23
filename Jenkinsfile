@@ -22,17 +22,21 @@ pipeline {
           appUpdateStart = getCurrTime()
           printInfo("################## Chrono => Treatment 1 start ${appUpdateStart} ##################")
           NB_VOYELLES = compterNbVoyelles(params.input_word)
-          printInfo("NB_VOYELLES : ${NB_VOYELLES}")  
+          printInfo("NB_VOYELLES : ${NB_VOYELLES}")
+	  if (NB_VOYELLES > 5){
+	  	env.ACTIVATE = true
+	  }
           printInfo("################## Chrono => Treatment 1 ended at ${getCurrTime()} ##################")
         }
       }	  
     }
     stage('Treatment 2') {
+	    when { expression ( env.ACTIVATE == true )}
       steps {
         script {
           appBuildStart = getCurrTime()
           printInfo("################## Chrono => Treatment 2 start ${appBuildStart} ##################")
-		  
+	  printNote("Hellow, I am on")
 		  
           printInfo("################## Chrono => Treatment 2 ended at ${getCurrTime()} ##################")
         }
