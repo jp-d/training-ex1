@@ -12,7 +12,7 @@ pipeline {
   }
   
   parameters {
-    string(name: "input_word", defaultValue: "soleil", trim: true, description: "Input word")
+    string(name: "input_word", defaultValue: "anticonstitutionellement", trim: true, description: "Input word")
   }
   
   stages {
@@ -25,16 +25,13 @@ pipeline {
           printInfo("NB_VOYELLES : ${NB_VOYELLES}")  
           printInfo("################## Chrono => Treatment 1 ended at ${getCurrTime()} ##################")
 	  if (NB_VOYELLES >= 5 ) {
-            env.TRIGGER = "ON"
-            printInfo("TRIGGER: " + env.TRIGGER)
-          } else {
-            env.TRIGGER = "OFF"
+            env.TRIGGER = true
           }
         }
       }	  
     }
     stage('Treatment 2') {
-      when { expression { env.TRIGGER == "ON" } }
+      when { expression { env.TRIGGER == true } }
       steps {
         script {
           appBuildStart = getCurrTime()
